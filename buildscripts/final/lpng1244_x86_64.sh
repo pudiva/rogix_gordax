@@ -1,0 +1,1 @@
+lpng1244_auto.sh

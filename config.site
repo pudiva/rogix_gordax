@@ -1,0 +1,145 @@
+#!/bin/sh
+# 
+# Rogi's config.site
+#
+
+echo "loading Rogi's config.site script"
+
+# Default prefix if configured without --prefix
+ac_default_prefix='/usr/local'
+
+# This script recognizes new configure options --enable-games-fhs
+# (environment variable enable_games_fhs=yes) to mark package as game
+# hierrarchy package. It also recognizes --disable-games-games
+# (enable_games_games=no) to disable <dir>/games/games effect and
+# --enable-libexec-sbin (enable_libexec_sbin=yes) to bind libexecdir
+# to sbindir instead of libdir.
+
+if [ ! $build ]; then
+	build=`uname -m`
+fi
+
+# Set the installation prefix
+if [ "$prefix" == NONE ]; then
+	prefix="$ac_default_prefix"
+fi
+
+fhs_datadir='${prefix}/share'
+fhs_sysconfdir='${prefix}/etc'
+fhs_localstatedir='${prefix}/var'
+fhs_imddir='${prefix}'
+fhs_mandir='${datadir}/man'
+fhs_infodir='${datadir}/info'
+
+case "$prefix" in
+'' | / )
+	if [ "$exec_prefix" == 'NONE' ]; then
+		exec_prefix=''
+		prefix='/usr'
+	else
+		# datadir should not be used directly by apps under prefix ""
+		fhs_datadir='/usr/share'
+
+		if [ "$includedir" == '${prefix}/include' ]; then
+			includedir='/usr/include'
+		fi
+	fi
+
+	fhs_sysconfdir='/etc'
+	fhs_localstatedir='/var'
+	fhs_imddir="$fhs_datadir"
+	;;
+
+/usr )
+	fhs_sysconfdir='/etc'
+	fhs_localstatedir='/var'
+	fhs_imddir='$fhs_datadir'
+	;;
+
+/usr/local )
+	fhs_localstatedir='/var/local'
+	fhs_sysconfdir='/usr/local/etc'
+	;;
+	
+/usr/X11* )
+	fhs_datadir='${prefix}/lib'$qual'/X11'
+	fhs_sysconfdir='/etc/X11'
+	fhs_localstatedir='/var' # guess from /var/lib'$qual'/xdm
+	fhs_mandir='${prefix}/man'
+	fhs_imddir="$fhs_datadir"
+	;;
+
+/opt | /opt/* )
+	fhs_sysconfdir='/etc${prefix}' # i.e. /etc/opt | /etc/opt/*
+	fhs_localstatedir='/var${prefix}' # i.e. /var/opt | /var/opt/*
+	;;
+esac
+
+if [ "$bindir" == '${exec_prefix}/bin' ]; then
+	if [ "$enable_games_fhs" == yes ]; then
+		bindir='${exec_prefix}/games'
+	fi
+fi
+
+if [ "$libdir" == '${exec_prefix}/lib' ]; then
+	libdir='${exec_prefix}/lib'$qual
+fi
+
+if [ "$libexecdir" == '${exec_prefix}/libexec' ]; then
+	if [ "$enable_libexec_sbin" == yes ]; then
+		libexecdir='${exec_prefix}/sbin'
+	else
+		libexecdir='${exec_prefix}/lib'$qual
+	fi
+fi
+
+if [ "$datadir" == '${prefix}/share' ]; then
+	if [ "$enable_games_fhs" == yes -a "$enable_games_games" != 'no' ]; then
+		datadir="$fhs_datadir/games"
+	else
+		datadir="$fhs_datadir"
+	fi
+fi
+
+if [ "$sysconfdir" == '${prefix}/etc' ]; then
+	sysconfdir="$fhs_sysconfdir"
+fi
+
+if [ "$localstatedir" == '${prefix}/var' ]; then
+	if [ "$enable_games_fhs" == yes -a "$enable_games_games" != 'no' ]; then
+		localstatedir="$fhs_localstatedir/games"
+	else
+		localstatedir="$fhs_localstatedir"
+	fi
+fi
+
+if [ "$sharedstatedir" == '${prefix}/com' ]; then
+	if [ "$enable_games_fhs" == yes ]; then
+		if [ "$enable_games_games" == no ]; then
+			sharedstatedir="$fhs_localstatedir"
+		else
+			sharedstatedir="$fhs_localstatedir/games"
+		fi
+	else
+		sharedstatedir="$fhs_localstatedir/cache"
+	fi
+fi
+
+if [ "$infodir" == '${prefix}/info' ]; then
+	if [ "$fhs_infodir" == '' ]; then
+		infodir="$fhs_imddir/info" ; else
+		infodir="$fhs_infodir"
+	fi
+fi
+
+if [ "$mandir" == '${prefix}/man' ]; then
+	if [ "$fhs_mandir" == '' ]; then
+		mandir="$fhs_imddir/man" ; else
+		mandir="$fhs_mandir"
+	fi
+fi
+
+# This is not a standard part of GNU, but can be defined.
+if [ "$docdir" == '${prefix}/doc' ]; then
+	docdir="$fhs_imddir/doc"
+fi

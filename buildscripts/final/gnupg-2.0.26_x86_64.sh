@@ -1,0 +1,1 @@
+gnupg-2.0.26_auto.sh

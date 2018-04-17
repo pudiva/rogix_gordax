@@ -1,0 +1,1 @@
+../lnauto.sh

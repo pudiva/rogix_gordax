@@ -1,0 +1,1 @@
+libsigsegv-2.6_auto.sh

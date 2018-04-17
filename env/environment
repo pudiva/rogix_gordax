@@ -1,0 +1,29 @@
+#!/bin/sh
+
+# devel stuff
+export CFLAGS="-O2 -march=native -fomit-frame-pointer -pipe"
+export CXXFLAGS="$CFLAGS"
+export LDFLAGS="-L/usr/local/ssl/lib64 -L/usr/local/ssl/lib"
+export CONFIG_SITE="/gordax/config.site"
+
+export PKG_CONFIG_PATH_x86_64='/lib64/pkgconfig:/usr/lib64/pkgconfig:/usr/local/lib64/pkgconfig:/usr/local/ssl/lib64/pkgconfig:/usr/X11R7/lib64/pkgconfig:/usr/X11R7/share/pkgconfig'
+export PKG_CONFIG_PATH_i686='/lib/pkgconfig:/usr/lib/pkgconfig:/usr/local/lib/pkgconfig:/usr/local/ssl/lib/pkgconfig:/usr/X11R7/lib/pkgconfig:/usr/X11R7/share/pkgconfig'
+export PKG_CONFIG_PATH="$PKG_CONFIG_PATH_x86_64"
+
+export ILP_VENDOR="IndexLibrorumProhibitorum"
+export ILP_OS="linux"
+
+export HBT64="\
+--host=x86_64-$ILP_VENDOR-$ILP_OS
+--build=x86_64-$ILP_VENDOR-$ILP_OS
+--target=x86_64-$ILP_VENDOR-$ILP_OS"
+
+export HBT32="\
+--host=i686-$ILP_VENDOR-$ILP_OS
+--build=i686-$ILP_VENDOR-$ILP_OS
+--target=i686-$ILP_VENDOR-$ILP_OS"
+
+# gnubuilder stuff
+export BUILDSCRIPTS_DIR="/gordax/buildscripts"
+
+

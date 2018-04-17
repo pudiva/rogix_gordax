@@ -1,0 +1,1 @@
+SDL_ttf-2.0.10_auto.sh

@@ -1,0 +1,1 @@
+../base_XORG-7.6_auto.sh

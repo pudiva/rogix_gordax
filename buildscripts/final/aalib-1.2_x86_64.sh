@@ -1,0 +1,1 @@
+aalib-1.2_auto.sh

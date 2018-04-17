@@ -1,0 +1,1 @@
+../base_usr_auto.sh

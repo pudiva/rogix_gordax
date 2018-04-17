@@ -1,0 +1,1 @@
+firefox-6.0_auto.sh

@@ -1,0 +1,1 @@
+ghostscript-9.02_auto.sh

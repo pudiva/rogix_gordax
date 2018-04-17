@@ -1,0 +1,1 @@
+fribidi-0.10.9_auto.sh

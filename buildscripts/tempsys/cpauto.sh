@@ -1,0 +1,1 @@
+../cpauto.sh

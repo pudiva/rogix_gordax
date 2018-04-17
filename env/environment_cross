@@ -1,0 +1,5 @@
+#!/bin/sh
+
+export PATH="$PATH:~/bin:/GORDAX/bin:$TOOLCHAIN_DIR/bin:$TOOLCHAIN_DIR/sbin"
+
+

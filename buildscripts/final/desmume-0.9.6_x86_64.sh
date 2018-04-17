@@ -1,0 +1,1 @@
+desmume-0.9.6_auto.sh

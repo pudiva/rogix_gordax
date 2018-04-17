@@ -1,0 +1,1 @@
+pidgin-2.10.4_auto.sh

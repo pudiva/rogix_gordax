@@ -1,0 +1,26 @@
+#!/bin/sh
+
+export CFLAGS="-O2 -march=native -fomit-frame-pointer -pipe"
+#export LDFLAGS="-L/usr/local/ssl/lib64 -L/usr/local/ssl/lib"
+export CXXFLAGS="$CFLAGS"
+export CONFIG_SITE="/GORDAX/gordax/config.site"
+export BUILDSCRIPTS_DIR="/GORDAX/gordax/buildscripts"
+export TOOLCHAIN_DIR="/GORDAX/gordax/toolchain"
+export TEMPSYS_DIR="/GORDAX"
+export ILP_VENDOR="IndexLibrorumProhibitorum"
+export ILP_OS="linux"
+
+export HBT64="
+--host=x86_64-$ILP_VENDOR-$ILP_OS
+--build=x86_64-$ILP_VENDOR-$ILP_OS
+--target=x86_64-$ILP_VENDOR-$ILP_OS
+"
+export HBT32="
+--host=i686-$ILP_VENDOR-$ILP_OS
+--build=i686-$ILP_VENDOR-$ILP_OS
+--target=i686-$ILP_VENDOR-$ILP_OS
+"
+
+#export PATH="$PATH:~/bin:$TOOLCHAIN_DIR/bin:$TOOLCHAIN_DIR/sbin"
+
+

@@ -1,0 +1,1 @@
+xterm-262_auto.sh

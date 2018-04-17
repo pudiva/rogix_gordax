@@ -1,0 +1,1 @@
+smartmontools-5.40_auto.sh
