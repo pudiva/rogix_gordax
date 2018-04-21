@@ -1,2 +1,2 @@
 # rogix_gordax
-Distribuição Linux do rogi e do graxa
+Distribuição Linux do rogi e da gorda
